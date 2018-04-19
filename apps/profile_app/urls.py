@@ -5,4 +5,5 @@ urlpatterns = [
     url(r'^$', views.get_trainer),
     url(r'^(?P<trainer_ID>\d+)$', views.profile),
     url(r'^(?P<trainer_ID>\d+)/remove$', views.remove),
+    url(r'^(?P<trainer_ID>\d+)/edit$', views.edit),
 ]

@@ -4,18 +4,20 @@ from django.contrib import messages
 from django.shortcuts import render, HttpResponse, redirect
 from ..login_registration.models import *
 from .models import *
-import pokebase as pokebase
+import pokebase
 # Create your views here.
 
 
 def pokedex(request):
     pokemons = pokebase.APIResourceList('pokemon')
+    pokeList = []
+    for pk in pokeList:
+        print pk.name
+    print pokeList
     pokemon_list = []
-    for pk in pokemons:
-        pokemon_list.append(pokebase.NamedAPIResource('pokemon', pk['name']))
+    # for pk in pokemons:
+    #     pokemon_list.append(pokebase.NamedAPIResource('pokemon', pk['name']))
     print pokemon_list
-    # print poke.id
-    # print poke.name
     return render(request, 'pokedex_app/pokedex.html', {'pokemons': pokemons, 'pokebase': pokebase})
 
 

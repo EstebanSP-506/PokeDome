@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+    <title>Trainer Profile</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="container-fluid row align-items-top">
+            <div class="container border col">
+                <img src="profileimage.png" class="rounded mx-auto d-block" alt="Trainer Profile image">
+                <a href="/edit/profile/{{request.session.user_id}}">Edit Profile</a>
+                <p>Trainer name: {{trainer.name}}</p>
+                <p>Battles won: {{trainer.battles_won}}</p>
+                <p>Battles lost: {{trainer.battler_lost}}</p>
+                <p>Trainer since: {{trainer.create_at}}</p>
+                <a href="/pokedex">Go catch more pokemons</a>
+            </div>
+            <div class="container border col">
+                {{ 'placeholder for the list of the chosen pokemons'}}
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                    <label class="form-check-label" for="defaultCheck1">
+                        Pokemon 1
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                    <label class="form-check-label" for="defaultCheck1">
+                        Pokemon 2
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+                    <label class="form-check-label" for="defaultCheck1">
+                        Pokemon 3
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                    <label class="form-check-label" for="defaultCheck1">
+                        Pokemon 4
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck5">
+                    <label class="form-check-label" for="defaultCheck1">
+                        Pokemon 5
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck6">
+                    <label class="form-check-label" for="defaultCheck1">
+                        Pokemon 6
+                    </label>
+                </div>
+            </div>
+            <div class="container border col">
+                <h4>Team Stats</h4>
+                <p>Total Power: {{'sum of the total battle power of teams pokemons'}}</p>
+                <p>Total Defense: {{'sum of the total battle power of teams pokemons'}}</p>
+                <h4>Selected fighters:</h4>
+                <p>Battle Power: {{'sum of the power for the selected pokemon'}}</p>
+                <p>Battle Defense: {{'sum of the defense for the selected pokemons'}}</p>
+                <a href="/battle">Go Battle</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

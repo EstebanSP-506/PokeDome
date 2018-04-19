@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="disable-extension-feature" content="read-dom" />
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            for (pk = 20; pk <= 40; pk++) {
+                $.get("https://pokeapi.co/api/v2/pokemon/" + pk + "/", function (res) {
+                    console.log('pokemon ID: ' + res.id);
+                    console.log('name: ' + res.name);
+                    console.log('heigth: ' + res.height);
+                    console.log('weigth: ' + res.weight);
+                    console.log('url for sprite: ' + res.sprites.front_default);
+                    for (var i = 0; i < res.forms.length; i++) {
+                        console.log('form: ' + (i + 1) + ', ' + res.forms[i].name);
+                    }
+                    for (var i = 0; i < res.types.length; i++) {
+                        console.log('type: ' + (i + 1) + ', ' + res.types[i].type.name);
+                    }
+                }, "json");
+            }
+        })
+    </script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="images" style="max-height:200px; overflow-y:scroll"></div>
+    <div id="names" style="max-height:200px; overflow-y:scroll"></div>
+    <div id="bulbasaur"></div>
+</body>
+
+</html>

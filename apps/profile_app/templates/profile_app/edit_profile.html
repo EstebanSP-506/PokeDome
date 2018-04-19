@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+    <title>Edit Trainer Profile</title>
+</head>
+
+<body>
+    <div class='container mt-5'>
+        <p class="text-right">
+            <a href="/pokedex">Pokedex</a> |
+            <a href="/profile">Trainer Profile</a> |
+            <a href="/logout">Logout</a>
+        </p>
+        <div class="container-fluid">
+            <div class='row'>
+                <div class="col container border mx-auto">
+                    <img src="trainer image" alt="Trainer image">
+                    <form action="trainer/{{session.request.user_id}}/upload">
+                        <input type="file" name="pic" accept="image/*">
+                        <input type="submit" value="upload">
+                    </form>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col border">
+                    <form action="trainer/{{session.request.user_id}}/update" method="post">
+                        <p>Your name</p>
+                        <input type="text" name="username">
+                        <p>Trainer Name</p>
+                        <input type="text" name="trainername">
+                        <p>
+                            <input type="submit" value="Update Profile">
+                        </p>
+                    </form>
+                </div>
+                <div class="col border">
+                    <form action="trainer/{{session.request.user_id}}/password_change" method="post">
+                        <p>New password</p>
+                        <input type="password" name="newpassword">
+                        <p>Confirm password</p>
+                        <input type="password" name="confirmpassword">
+                        <p>
+                            <input type="submit" value="Change Password">
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
