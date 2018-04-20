@@ -59,17 +59,23 @@
                 </div>
                 <div class="container-fluid">
                     {% if members %} {% for pokemon in members%}
-                    <p>
-                        <img class='img img-thumbnail' style='width:90px' src='/static/pokedex_app/img/pkmns/{{pokemon.pk_id}}.png' alt="{{pokemon.name}}"> {{pokemon.name|capfirst}}
-                    </p>
+
+                    <img class='img-thumbnail' style='width:70px' src='/static/pokedex_app/img/pkmns/{{pokemon.pk_id}}.png' alt="{{pokemon.name}}">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">{{pokemon.name|capfirst}}</li>
+                        <li class="list-inline-item">HP: {{pokemon.health}}</li>
+                        <li class="list-inline-item">ATT: {{pokemon.attack}}</li>
+                        <li class="list-inline-item">DEF: {{pokemon.defense}}</li>
+                    </ul>
+
                     {%endfor%}{%endif%}
                 </div>
 
             </div>
             <div class="container border col">
                 <h4>Team Stats</h4>
-                <p>Total Power: {{'sum of the total battle power of teams pokemons'}}</p>
-                <p>Total Defense: {{'sum of the total battle power of teams pokemons'}}</p>
+                <p>Total Attack Power: {{attack}}</p>
+                <p>Total Defense Power: {{defense}}</p>
                 <h4>Selected Team:</h4>
                 {% for team in teams %}
                 <div class="container-fluid">
