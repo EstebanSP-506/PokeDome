@@ -17,12 +17,26 @@ def get_trainer(request):
 def profile(request, trainer_ID):
     trainer = User.objects.get(id=trainer_ID)
     teams = trainer.owns_teams.all()
-    members = Team.objects.get(
-        id=request.session['selected_team']).members.all()
+    if 'selected_team' not in request.session:
+        try:
+            request.session['selected_team'] = trainer.owns_teams.last().id
+        except:
+            len(teams) == 0
+
+    if len(teams) == 0:
+        messages.add_message(
+            request, messages.ERROR, 'please create a Team in order to Start your adventure')
+        selected_team = []
+        members = []
+    else:
+        selected_team = trainer.owns_teams.get(
+            id=request.session['selected_team'])
+        members = Team.objects.get(
+            id=request.session['selected_team']).members.all()
     print trainer.name+' printed every time profile route is accessed'
-    print teams
-    print members
-    return render(request, 'profile_app/profile.html', {'trainer': trainer, 'teams': teams, 'members': members})
+    # print teams
+    # print members
+    return render(request, 'profile_app/profile.html', {'trainer': trainer, 'teams': teams, 'members': members, 'selected_team': selected_team})
 
 
 def remove(request, trainer_ID):
