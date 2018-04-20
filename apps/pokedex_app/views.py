@@ -13,20 +13,24 @@ def pokedex(request):
     if 'poke_id' not in request.session:
         request.session['poke_id'] = 1
     pokemons = Pokemon.objects.all()
-    types = pb.APIResourceList('type')
+    pokeData = Pokemon.objects.get(pk_id=request.session['poke_id'])
+    pokeTypes = pokeData.pk_type.all()
+    # pokemons2 = pb.APIResourceList('pokemon')
+    # types = pb.APIResourceList('type')
     # print types
-    typeList = []
-    for pk_type in types:
-        # print pk_type['url']
-        # print pk_type['name']
-        typeList.append((pk_type['url'], pk_type['name']))
+    # typeList = []
+    # for pk_type in types:
+    #     print pk_type['url']
+    #     print pk_type['name']
+    #     typeList.append((pk_type['url'], pk_type['name']))
 
     # pokeList = []
 
-    # for pk in itertools.islice(pokemons, 0, 151):
-    # print pk['url']
-    # print pk['name']
-    # pokeList.append((pk['url'], pk['name']))
+    # for pk in itertools.islice(pokemons2, 0, 151):
+    #     print pk
+    #     print pk['url']
+    #     print pk['name']
+    #     pokeList.append((pk['url'], pk['name']))
 
     # print pokeList
     # for pkm in pokeList:
@@ -35,7 +39,7 @@ def pokedex(request):
     # PokeType.objects.add_types(typeList)
     # Pokemon.objects.add_pokemon(pokeList)
     context = {'pokemons': pokemons, 'pb': pb,
-               'pokeData': Pokemon.objects.get(pk_id=request.session['poke_id'])}
+               'pokeData': pokeData, 'pokeTypes': pokeTypes}
     return render(request, 'pokedex_app/pokedex.html', context)
 
 

@@ -27,9 +27,10 @@
                         <ul>
                             <li>Pokemon ID: {{pokeData.pk_id}}</li>
                             <li>Pokemon Name: {{pokeData.name|capfirst}}</li>
-                            <li>Type: {% for type in pokeData.types %}{{ type.name }}{% endfor %}</li>
-                            <li>Height: {{pokeData.pk_height}}'</li>
-                            <li>Weight: {{pokeData.pk_weight}} pounds</li>
+                            <li>Type: {% for type in pokeTypes %}
+                                <span>{{ type.name|capfirst }}</span>{% endfor %}</li>
+                            <li>Height: {{pokeData.pk_height}} m</li>
+                            <li>Weight: {{pokeData.pk_weight}} kg</li>
                             <li>Location: Yeah rigth... as if I have the time</li>
                         </ul>
                     </div>

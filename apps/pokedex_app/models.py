@@ -43,8 +43,8 @@ class PokeManager(models.Manager):
                 # this pulls the pokemon object from the pokebase
                 pokeData = pb.pokemon(name)
                 pk_id = pokeData.id
-                pk_height = pokeData.height
-                pk_weight = pokeData.weight
+                pk_height = float(pokeData.height)*0.1
+                pk_weight = float(pokeData.weight)*0.1
                 types = pokeData.types  # Types is a list including all the types for the pokemon
                 print types
 
@@ -66,8 +66,8 @@ class Pokemon(models.Model):
     health = models.IntegerField(default=100)
     attack = models.IntegerField(default=50)
     defense = models.IntegerField(default=50)
-    pk_height = models.IntegerField()
-    pk_weight = models.IntegerField()
+    pk_height = models.FloatField()
+    pk_weight = models.FloatField()
     api_url = models.CharField(max_length=255, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
