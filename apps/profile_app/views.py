@@ -61,6 +61,11 @@ def add_team(request, trainer_ID):
     if request.method == "POST":
         postData = request.POST
         print postData['team_name']
-        Team.objects.valid_team_add(postData, trainer_ID)
-
+        validation = Team.objects.valid_team_add(postData, trainer_ID)
+        if validation[0]:
+            messages.add_message(
+                request, messages.SUCCESS, 'Team Created Successfully')
+        else:
+            messages.add_message(
+                request, messages.ERROR, validation[1])
     return redirect('/trainer/'+trainer_ID)

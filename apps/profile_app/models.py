@@ -10,6 +10,8 @@ from ..pokedex_app.models import *
 class TeamManager(models.Manager):
     def valid_team_add(self, postData, trainer_ID):
         name = postData['team_name']
+        if len(name) == 0:
+            return(False, 'Please Enter a Team name')
         trainer = User.objects.get(id=trainer_ID)
         new_team = trainer.owns_teams.create(name=name)
         print trainer.trainername
