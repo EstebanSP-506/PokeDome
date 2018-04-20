@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.contrib import messages
 from django.shortcuts import render, HttpResponse, redirect
 from ..login_registration.models import *
+from ..profile_app.models import *
 from .models import *
 import pokebase as pb
 import itertools
@@ -50,10 +51,9 @@ def get_pokemon(request, poke_ID):
 
 
 def add2team(request, poke_ID):
-    response = 'placeholder process (including validation if the trainer already have 6 pokemons)'
-    return HttpResponse(response)
-
-
-def pokedex_builder(request):
-    pk_id = 500
-    return render(request, 'pokedex_app/pokedex_builder.html', {'pokemon_ID': pk_id})
+    trainer_ID = request.session['user_id']
+    team_ID = request.session['selected_team']
+    add2team = Team.objects.add_to_team(team_ID, trainer_ID, poke_ID)
+    if add2team[0]:
+        messages.add_message(request, messages.SUCCESS, add2team[1])
+    return redirect('/pokedex/')

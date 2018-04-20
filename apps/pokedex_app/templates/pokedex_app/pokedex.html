@@ -20,6 +20,13 @@
             <a class="nav-link" href="/logout">Log Out</a>
         </nav>
         <div class="container-fluid border">
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+            </ul>
+            {% endif %}
             <div class="row mt-5 mb-5">
                 <div class="container border" id='pokedata' style="width: 45%">
                     <img class='rounded mx-auto' style='width:200px' src='/static/pokedex_app/img/pkmns/{{pokeData.pk_id}}.png' alt="{{pokeData.name}}">

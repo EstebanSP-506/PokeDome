@@ -16,6 +16,14 @@ class TeamManager(models.Manager):
         print 'team name: '+name
         return (True, new_team)
 
+    def add_to_team(self, team_ID, trainer_ID, pokemon_ID):
+        trainer = User.objects.get(id=trainer_ID)
+        team = trainer.owns_teams.get(id=team_ID)
+        pokemon = Pokemon.objects.get(pk_id=pokemon_ID)
+        # add to team
+        team.members.add(pokemon)
+        return (True, 'successfully added to team')
+
 
 class Team(models.Model):
     name = models.CharField(max_length=255, blank=True)
