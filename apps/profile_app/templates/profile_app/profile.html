@@ -12,14 +12,21 @@
 
 <body>
     <div class="container mt-5">
-        <div class="container-fluid row align-items-top">
+        <nav class="nav justify-content-end navbar-light bg-light">
+            <h3 class="navbar-brand">Hello {{trainer.name}}!</h3>
+            <a class="nav-link active" href="/pokedex/">Pokedex</a>
+            <a class="nav-link active" href="/trainer/{{request.session.user_id}}/edit">Edit Profile</a>
+            <a class="nav-link" href="#">Battle Dome</a>
+            <a class="nav-link" href="/logout">Log Out</a>
+        </nav>
+        <div class="container justify-content-centered row align-items-top mr-0 ml-0 pr-0 pl-0">
             <div class="container border col">
                 <img src="profileimage.png" class="rounded mx-auto d-block" alt="Trainer Profile image">
-                <a href="/edit/profile/{{request.session.user_id}}">Edit Profile</a>
-                <p>Trainer name: {{trainer.name}}</p>
+                <a href="/trainer/{{request.session.user_id}}/edit">Edit Profile</a>
+                <p>Trainer name: {{trainer.trainername}}</p>
                 <p>Battles won: {{trainer.battles_won}}</p>
-                <p>Battles lost: {{trainer.battler_lost}}</p>
-                <p>Trainer since: {{trainer.create_at}}</p>
+                <p>Battles lost: {{trainer.battles_lost}}</p>
+                <p>Trainer since: {{trainer.created_at}}</p>
                 <a href="/pokedex">Go catch more pokemons</a>
             </div>
             <div class="container border col">

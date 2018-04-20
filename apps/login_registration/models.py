@@ -59,6 +59,8 @@ class User(models.Model):
     name = models.CharField(max_length=255)
     trainername = models.CharField(max_length=255, unique=True)
     password = models.CharField(max_length=255)
+    battles_won = models.IntegerField(default=0)
+    battles_lost = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()

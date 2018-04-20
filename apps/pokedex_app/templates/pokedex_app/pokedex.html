@@ -13,38 +13,37 @@
 </head>
 
 <body>
-    <div class="container-fluid mt-5">
-        <div class="row mt-5">
-            <div class="container" id='pokedata' style="width: 45%">
-                <img class='rounded mx-auto' style='width:200px' src='/static/pokedex_app/img/pkmns/{{pokeData.pk_id}}.png' alt="{{pokeData.name}}">
-                <div class="container ">
-                    <ul>
-                        <li>Pokemon ID: {{pokeData.pk_id}}</li>
-                        <li>Pokemon Name: {{pokeData.name|capfirst}}</li>
-                        <li>Type: {% for type in pokeData.types %}{{ type.name }}{% endfor %}</li>
-                        <li>Height: {{pokeData.pk_height}}'</li>
-                        <li>Weight: {{pokeData.pk_weight}} pounds</li>
-                        <li>Location: Yeah rigth... as if I have the time</li>
-                    </ul>
+    <div class="container mt-5">
+        <nav class="nav justify-content-end navbar-light bg-light">
+            <a class="nav-link active" href="/trainer/{{request.session.user_id}}">Trainer Profile</a>
+            <a class="nav-link" href="#">Battle Dome</a>
+            <a class="nav-link" href="/logout">Log Out</a>
+        </nav>
+        <div class="container-fluid border">
+            <div class="row mt-5 mb-5">
+                <div class="container border" id='pokedata' style="width: 45%">
+                    <img class='rounded mx-auto' style='width:200px' src='/static/pokedex_app/img/pkmns/{{pokeData.pk_id}}.png' alt="{{pokeData.name}}">
+                    <div class="container ">
+                        <ul>
+                            <li>Pokemon ID: {{pokeData.pk_id}}</li>
+                            <li>Pokemon Name: {{pokeData.name|capfirst}}</li>
+                            <li>Type: {% for type in pokeData.types %}{{ type.name }}{% endfor %}</li>
+                            <li>Height: {{pokeData.pk_height}}'</li>
+                            <li>Weight: {{pokeData.pk_weight}} pounds</li>
+                            <li>Location: Yeah rigth... as if I have the time</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="container-fluid border " id='pokedex_list' style="width: 45%;overflow-y:scroll; height:500px ">
+                    {% for pk in pokemons %}
+                    <p>
+                        <img class='img img-thumbnail' style='width:50px' src='/static/pokedex_app/img/pkmns/{{pk.pk_id}}.png' alt="{{pk.name}}">
+                        <a href="{{pk.pk_id}}"> {{pk.name|capfirst}}</a>
+                    </p>
+                    {% endfor %}
                 </div>
             </div>
-
-            <div class="container-fluid " id='pokedex_list' style="width: 45%;overflow-y:scroll; height:500px ">
-                {% for pk in pokemons %}
-                <p>
-                    <img class='img img-thumbnail' style='width:50px' src='/static/pokedex_app/img/pkmns/{{pk.pk_id}}.png' alt="{{pk.name}}">
-                    <a href="{{pk.pk_id}}"> {{pk.name|capfirst}}</a>
-                </p>
-                {% endfor %}
-            </div>
-        </div>
-        <div class="container-fluid border">
-
-            {% for url, pkm in pokeList %}
-            <p>
-                <a href="{{url}}"> {{pkm}}</a>
-            </p>
-            {% endfor %}
         </div>
     </div>
 </body>
