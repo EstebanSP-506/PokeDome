@@ -2,28 +2,29 @@
 <html lang="en">
 
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
         crossorigin="anonymous">
+    <link rel='stylesheet' href="{% static 'css/bootstrap.min.css' %}">
     <title>PokeShop</title>
 </head>
 
 <body>
     <div class="container-fluid mt-5">
         <div class="row mt-5">
-            <div class="container-fluid" id='pokedata' style="width: 45%">
-                <img class='rounded mx-auto d-block' src=" https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/649.png "
-                    alt="genesect sprite ">
+            <div class="container" id='pokedata' style="width: 45%">
+                <img class='rounded mx-auto' style='width:200px' src='/static/pokedex_app/img/pkmns/{{pokeData.pk_id}}.png' alt="{{pokeData.name}}">
                 <div class="container ">
                     <ul>
-                        <li>Pokemon ID: 649</li>
-                        <li>Pokemon Name: Genesect</li>
-                        <li>Type: legendary</li>
-                        <li>Height: 9'</li>
-                        <li>Weight: 50 pounds</li>
-                        <li>Location: using cheat codes</li>
+                        <li>Pokemon ID: {{pokeData.pk_id}}</li>
+                        <li>Pokemon Name: {{pokeData.name|capfirst}}</li>
+                        <li>Type: {% for type in pokeData.types %}{{ type.name }}{% endfor %}</li>
+                        <li>Height: {{pokeData.pk_height}}'</li>
+                        <li>Weight: {{pokeData.pk_weight}} pounds</li>
+                        <li>Location: Yeah rigth... as if I have the time</li>
                     </ul>
                 </div>
             </div>
@@ -31,10 +32,19 @@
             <div class="container-fluid " id='pokedex_list' style="width: 45%;overflow-y:scroll; height:500px ">
                 {% for pk in pokemons %}
                 <p>
-                    <a href="{{pk.url}}">{{pokemon.id}} {{pk.name}}</a>
+                    <img class='img img-thumbnail' style='width:50px' src='/static/pokedex_app/img/pkmns/{{pk.pk_id}}.png' alt="{{pk.name}}">
+                    <a href="{{pk.pk_id}}"> {{pk.name|capfirst}}</a>
                 </p>
                 {% endfor %}
             </div>
+        </div>
+        <div class="container-fluid border">
+
+            {% for url, pkm in pokeList %}
+            <p>
+                <a href="{{url}}"> {{pkm}}</a>
+            </p>
+            {% endfor %}
         </div>
     </div>
 </body>

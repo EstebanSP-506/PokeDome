@@ -9,8 +9,9 @@
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script>
         $(document).ready(function () {
-            for (pk = 20; pk <= 40; pk++) {
+            for (pk = 400; pk <= 405; pk++) {
                 $.get("https://pokeapi.co/api/v2/pokemon/" + pk + "/", function (res) {
+                    console.log(res)
                     console.log('pokemon ID: ' + res.id);
                     console.log('name: ' + res.name);
                     console.log('heigth: ' + res.height);
