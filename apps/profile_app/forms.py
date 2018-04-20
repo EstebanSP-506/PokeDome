@@ -2,4 +2,9 @@ from django import forms
 
 
 class ProfileUpdate(forms.Form):
-    your_name = forms.CharField(label='Your name', max_length=100)
+    name = forms.CharField(label='User name', max_length=100)
+    trainername = forms.CharField(label='Trainer Name', max_length=100)
+
+
+class ImageUploadForm(forms.Form):
+    image = forms.ImageField()

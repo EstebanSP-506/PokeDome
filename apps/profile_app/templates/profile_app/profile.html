@@ -13,7 +13,6 @@
 <body>
     <div class="container mt-5">
         <nav class="nav justify-content-end navbar-light bg-light">
-            <h3 class="navbar-brand">Hello {{trainer.name}}!</h3>
             <a class="nav-link active" href="/pokedex/">Pokedex</a>
             <a class="nav-link active" href="/trainer/{{request.session.user_id}}/edit">Edit Profile</a>
             <a class="nav-link" href="#">Battle Dome</a>
@@ -21,7 +20,8 @@
         </nav>
         <div class="container justify-content-centered row align-items-top mr-0 ml-0 pr-0 pl-0">
             <div class="container border col">
-                <img src="profileimage.png" class="rounded mx-auto d-block" alt="Trainer Profile image">
+                <h3 class="navbar-brand">Hello {{trainer.name}}!</h3>
+                <img src="{{trainer.image.url}}" class="rounded mx-auto d-block" alt="Trainer Profile image">
                 <a href="/trainer/{{request.session.user_id}}/edit">Edit Profile</a>
                 <p>Trainer name: {{trainer.trainername}}</p>
                 <p>Battles won: {{trainer.battles_won}}</p>
@@ -30,52 +30,46 @@
                 <a href="/pokedex">Go catch more pokemons</a>
             </div>
             <div class="container border col">
-                {{ 'placeholder for the list of the chosen pokemons'}}
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">
-                        Pokemon 1
-                    </label>
+                <div class="container">
+                    <form action='/trainer/{{trainer.id}}/add_team' method="POST">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <label for="team_name" class="col-sm-1-12 col-form-label">Create New Team</label>
+                            <div class="col-sm-1-12">
+                                <input type="text" class="form-control" name="team_name" id="team_name" placeholder="new team name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="offset-sm-2 col-sm-10">
+                                <button type="submit" class="btn btn-primary">Action</button>
+                                <button type="submit" class="btn btn-primary">Action</button>
+                                <button type="submit" class="btn btn-primary">Action</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+                {% for team in teams %} {% if team.name == 'Changos' %}
+                <h5>{{team.name}}</h5>
+                <div class="container-fluid">
+                    {% if members %} {% for pokemon in members%}
                     <label class="form-check-label" for="defaultCheck1">
-                        Pokemon 2
+                        {{pokemon.name}}
                     </label>
+                    {%endfor%}{%endif%}
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
-                    <label class="form-check-label" for="defaultCheck1">
-                        Pokemon 3
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
-                    <label class="form-check-label" for="defaultCheck1">
-                        Pokemon 4
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck5">
-                    <label class="form-check-label" for="defaultCheck1">
-                        Pokemon 5
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck6">
-                    <label class="form-check-label" for="defaultCheck1">
-                        Pokemon 6
-                    </label>
-                </div>
+                {%endif%} {%endfor%}
+
             </div>
             <div class="container border col">
                 <h4>Team Stats</h4>
                 <p>Total Power: {{'sum of the total battle power of teams pokemons'}}</p>
                 <p>Total Defense: {{'sum of the total battle power of teams pokemons'}}</p>
-                <h4>Selected fighters:</h4>
-                <p>Battle Power: {{'sum of the power for the selected pokemon'}}</p>
-                <p>Battle Defense: {{'sum of the defense for the selected pokemons'}}</p>
-                <a href="/battle">Go Battle</a>
+                <h4>Selected Team:</h4>
+                {% for team in teams %}
+                <div class="container-fluid">
+                    <a name="{{team.name}}" id="{{team.name}}" class="btn btn-light" href="/trainer/{{trainer.id}}/{{team.id}}/select" role="button">{{team.name}}</a>
+                </div>
+                {%endfor%}
             </div>
         </div>
     </div>

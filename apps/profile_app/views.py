@@ -15,7 +15,14 @@ def get_trainer(request):
 
 
 def profile(request, trainer_ID):
-    return render(request, 'profile_app/profile.html', {'trainer': User.objects.get(id=request.session['user_id'])})
+    trainer = User.objects.get(id=trainer_ID)
+    teams = trainer.owns_teams.all()
+    members = Team.objects.get(
+        id=request.session['selected_team']).members.all()
+    print trainer.name+' printed every time profile route is accessed'
+    print teams
+    print members
+    return render(request, 'profile_app/profile.html', {'trainer': trainer, 'teams': teams, 'members': members})
 
 
 def remove(request, trainer_ID):
@@ -25,3 +32,21 @@ def remove(request, trainer_ID):
 
 def edit(request, trainer_ID):
     return render(request, 'profile_app/edit_profile.html')
+
+
+def select_team(request, trainer_ID, team_ID):
+    request.session['selected_team'] = team_ID
+    request.session.modified = True
+    trainer = User.objects.get(id=trainer_ID)
+    trainer.preferred_team = team_ID
+    trainer.save()
+    return redirect('/trainer/'+trainer_ID)
+
+
+def add_team(request, trainer_ID):
+    if request.method == "POST":
+        postData = request.POST
+        print postData['team_name']
+        Team.objects.valid_team_add(postData, trainer_ID)
+
+    return redirect('/trainer/'+trainer_ID)

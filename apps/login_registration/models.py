@@ -2,7 +2,8 @@
 from __future__ import unicode_literals
 import bcrypt
 from django.db import models
-
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 # Create your models here.
 
 
@@ -59,8 +60,11 @@ class User(models.Model):
     name = models.CharField(max_length=255)
     trainername = models.CharField(max_length=255, unique=True)
     password = models.CharField(max_length=255)
+    preferred_team = models.IntegerField(blank=True, null=True)
     battles_won = models.IntegerField(default=0)
     battles_lost = models.IntegerField(default=0)
+    picture = models.ImageField(
+        upload_to='user_picture/')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
