@@ -31,12 +31,22 @@ def profile(request, trainer_ID):
         selected_team = []
         members = []
     else:
-        selected_team = trainer.owns_teams.get(
-            id=request.session['selected_team'])
-        members = selected_team.members.all()
-        for pokemon in members:
-            attack += pokemon.attack
-            defense += pokemon.defense
+        print request.session['selected_team']
+        print trainer.owns_teams.all()
+        for team in trainer.owns_teams.all():
+            if int(request.session['selected_team']) == int(team.id):
+                print team.id
+                selected_team = trainer.owns_teams.get(
+                    id=request.session['selected_team'])
+                members = selected_team.members.all()
+                for pokemon in members:
+                    attack += pokemon.attack
+                    defense += pokemon.defense
+                break
+            else:
+                selected_team = None
+                members = None
+
     print trainer.name+' printed every time profile route is accessed'
     # print teams
     # print members
